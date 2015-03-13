@@ -1,9 +1,10 @@
 def make_users
   Student.create! first_name: 'Student',
                   last_name: "1",
-                  email: "student#1@gmail.com",
+                  email: "student1@gmail.com",
                   password: 'password',
-                  login: 'cs61as-aa'
+                  login: 'cs61as-aou',
+                  added_info: true
   Reader.create! first_name: 'Staff',
                 last_name: "#1",
                 email: "staff1@gmail.com",
@@ -63,4 +64,4 @@ end
 
 make_users
 make_quizzes
-make_requests
+# make_requests
