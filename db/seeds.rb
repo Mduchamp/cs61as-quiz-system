@@ -3,17 +3,17 @@ def make_users
                   last_name: "1",
                   email: "student#1@gmail.com",
                   password: 'password',
-                  login: 'cs61as-aou'
+                  login: 'cs61as-aa'
   Reader.create! first_name: 'Staff',
                 last_name: "#1",
                 email: "staff1@gmail.com",
                 password: 'password',
-                login: 'cs61as-av'
+                login: 'cs61as-ra'
   Gsi.create! first_name: "Staff",
                 last_name: "2",
                 email: "staff2@gmail.com",
                 password: "password",
-                login: "cs61as-ab"
+                login: "cs61as-ta"
 end
 
 def make_quizzes
