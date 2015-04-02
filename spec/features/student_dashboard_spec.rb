@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+def lock_and_destroy(quiz_request)
+  quiz_request.lock_and_destroy! nil, 60
+end
+
 describe 'The student dashboard' do
   let(:student) { create :student }
   before { sign_in student }
@@ -57,19 +61,19 @@ describe 'The student dashboard' do
 
     describe 'approving' do
       it 'destroys the quiz request' do
-        expect { student.quiz_request.lock_and_destroy! nil }
+        expect { lock_and_destroy(student.quiz_request) }
                .to change(QuizRequest, :count).by(-1)
       end
 
       it 'creates a quiz lock' do
-        expect { student.quiz_request.lock_and_destroy! nil }
+        expect { lock_and_destroy(student.quiz_request) }
                .to change(QuizLock, :count).by 1
       end
     end
 
     describe 'after being approved' do
       before do
-        student.quiz_request.lock_and_destroy! nil
+        lock_and_destroy(student.quiz_request)
         visit students_dashboard_path
       end
 

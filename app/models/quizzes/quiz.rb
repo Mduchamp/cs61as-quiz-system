@@ -28,6 +28,9 @@ class Quiz < ActiveRecord::Base
   scope :published, -> { where is_draft: false }
   scope :invalid, -> { where lesson: "" }
 
+  @@correct_total_points = 10
+  validate :version_not_reused 
+  # :points_add_up, :questions_not_reused
   # validates :lesson, :version, presence: true
   
   # why is this in the object and not in db?
@@ -129,4 +132,33 @@ class Quiz < ActiveRecord::Base
       [sortValue.find_index(q.lesson), q.version]
     end
   end
+
+  def version_not_reused
+    quizzes_with_same_version = Quiz.where("lesson = ? AND version = ? AND id != ?", lesson.to_s, version, id)
+    errors.add(:version, "This version has already been used!") unless quizzes_with_same_version.empty?
+  end
+
+  # this function works, but breaks tests
+  # def points_add_up
+  #   return if is_draft?
+
+  #   total = 0
+  #   relationships.each do |r|
+  #     total += r.points 
+  #   end
+
+  #   if total != @@correct_total_points
+  #     msg = "Points must sum to #{@@correct_total_points} (now #{total})"
+  #     errors.add(:relationships, msg) 
+  #   end
+  # end
+
+  # this function is broken
+  # def questions_not_reused
+  #   my_questions = []
+  #   questions.each { |q| my_questions << q.id }
+  #   other_quizzes = Quiz.where.not(:id => id)
+  #   reused_questions = other_quizzes.questions.where(:id => my_questions)
+  #   errors.add("Contains a question already used by a retake") unless reused_questions.is_empty
+  # end
 end

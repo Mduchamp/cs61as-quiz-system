@@ -1,8 +1,16 @@
 require 'spec_helper'
 
+def comments
+  "grade_comments"
+end
+
+def grade
+  "grade_grade"
+end
+
 def fill_in_grade
-  fill_in "Grade", with: 5
-  fill_in "Comments", with: "Good Job!"
+  fill_in grade, with: 5
+  fill_in comments, with: "Good Job!"
   click_button "Update Grade!"
 end
 

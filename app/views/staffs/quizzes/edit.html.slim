@@ -33,14 +33,16 @@
           = link_to "Edit Question", edit_staffs_question_path(question,
                                                         quiz_id: @quiz_form.id,
                                                         add_pts: true,
-                                                        lesson: false)
+                                                        lesson: false),
+                                                        id: "edit_question_#{question.id}"
           div
             p Question #{question.number(@quiz_form.id)}
             p Points: #{question.points(@quiz_form.id)}
             p Content: #{markdown question.content}
           = link_to "Remove", staffs_quiz_relationships_path(quiz_id: @quiz_form.id, question_id: question.id),
                               method: :delete,
-                              data: { confirm: 'Are you sure?'}
+                              data: { confirm: 'Are you sure?'},
+                              id: "remove_question_#{question.id}"
           br
       / = link_to 'Cancel', :back, class: 'small button'
 

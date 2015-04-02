@@ -17,7 +17,7 @@ end
 describe "Taking a quiz" do
   let!(:quiz) { create :quiz_with_questions }
   let!(:student) { create :student }
-  let!(:staff) { create :staff }
+  let!(:reader) { create :reader }
   let!(:quiz_lock) { create :quiz_lock, student: student, quiz: quiz }
 
   before { sign_in student }
@@ -36,7 +36,9 @@ describe "Taking a quiz" do
     it { should have_link "Start" }
 
     describe "clicking start" do
-      before { click_link "Start" }
+      before do
+        click_link "Start" 
+      end
 
       it "shows questions" do
         quiz.questions.each do |question|
@@ -54,7 +56,8 @@ describe "Taking a quiz" do
         before do
           quiz_lock.created_at = 1.hour.ago + 5.seconds
           quiz_lock.save
-          visit take_students_quizzes_path
+          check "honesty_statement"
+          click_button "Submit!"
           sleep 3
         end
 
@@ -75,14 +78,14 @@ describe "Taking a quiz" do
           expect(quiz_lock.reload).to be_locked
         end
 
-        it "shows the staff login page" do
+        it "shows the reader login page" do
           expect(page).to have_content "screen change"
         end
 
-        describe "filling in right staff info" do
+        describe "filling in right reader info" do
           before do
-            fill_in "Staff Login", with: staff.login
-            fill_in "Password", with: staff.password
+            fill_in "Staff Login", with: reader.login
+            fill_in "Password", with: reader.password
             click_button "Unlock"
           end
 
@@ -111,6 +114,7 @@ describe "Taking a quiz" do
           0.upto(2) do |n|
             page.execute_script("$(\"#{textarea_css(n)}\")[0].value = 'Answer #{n}'")
           end
+          check "honesty_statement"
         end
 
         it "and submitting creates Submissions and a TakenQuiz and destroys the QuizLock" do
@@ -124,9 +128,9 @@ describe "Taking a quiz" do
         describe "and submitting" do
           before { click_button "Submit!" }
 
-          it "assigns the quiz to a staff member" do
+          it "assigns the quiz to a reader" do
             taken_quiz = TakenQuiz.find_by student: student
-            expect(taken_quiz.staff).to be_present
+            expect(taken_quiz.reader).to be_present
           end
 
           it "redirects to dashboard" do

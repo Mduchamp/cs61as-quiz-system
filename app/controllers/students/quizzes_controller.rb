@@ -21,6 +21,12 @@ module Students
     end
 
     def submit
+      honest_statement_check = params[:honesty_statement]
+      if honest_statement_check == nil
+        flash[:error] = 'Please accept the academic honesty statement before submitting.'
+        redirect_to take_students_quizzes_path
+        return
+      end
       ql = QuizLock.find_by_student_id(current_user.id)
       if ql.locked
         flash[:error] = 'You wish you could turn this in.'
