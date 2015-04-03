@@ -32,7 +32,23 @@ module ApplicationHelper
     quizzes.map { |q| [q.to_s, q.id] }.unshift ["Random", nil]
   end
 
-  def get_quiz_time_selections
-    [60, 90, 120].map { |time| ["#{time} minutes", time] }
+  def get_quiz_time_selections(request)
+    option1 = 60
+    option2 = 90
+    option3 = 120
+    id = request.student.id
+    puts id
+    quiztime = QuizTime.find_by(student_id: id)
+    if quiztime != nil
+      time = quiztime.time
+    else
+      time = 0
+    end
+    if time == option2
+      return [option2, option1, option3].map { |time| ["#{time} minutes", time] }
+    elsif time == option3
+      return [option3, option1, option2].map { |time| ["#{time} minutes", time] }
+    end
+    return [option1, option2, option3].map { |time| ["#{time} minutes", time] }
   end
 end

@@ -7,19 +7,15 @@ Feature: taking a quiz
 Background: ???
 
 Scenario: Request a quiz
-  Given I am on the Student Dashboard
-  When I select 0-1 - Intro
+  Given I am logged in as a student
   And I press "Request quiz!"
-  Then I should be on the quiz approval page
-  And I should see "Please wait for your quiz to be approved"
+  Then I should see "You are currently requesting to take quiz"
 
 Scenario: Taking a quiz
-  Given I am on the quiz approval page
-  Then I should see "your quiz has been approved"
-  Then I press "Take quiz"
-  Then I press "Begin quiz"
-  Then I should be on the quiz page
-  And I should see "Question 1"
-  And I should see "You have (.d) minutes(s) (.d) second(s) remaining"
-  Then I press "Submit"
-  Then I should be on the Student Dashboard
+  Given I have been approved to take a quiz
+  When I click "Begin quiz!"
+  Then I should see "Question 1"
+  When I click "Start!"
+  Then I should see "Time left:0 minutes0 seconds"
+  When I finish the quiz
+  Then I should see "Welcome to the Student Dashboard!"

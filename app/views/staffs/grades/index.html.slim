@@ -11,7 +11,7 @@ h3 Quizzes To Grade
           = link_to g, staffs_student_quiz_path(g.student, g.quiz)
 
 
-h4 All Quizzes to Grade
+h4 All Quizzes to Grade (#{@all_to_grade.size})
 
 - if @all_to_grade.empty?
   p There are no quizzes to grade! Way to Go!

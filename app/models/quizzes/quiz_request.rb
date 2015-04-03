@@ -17,6 +17,10 @@ class QuizRequest < ActiveRecord::Base
   belongs_to :student
 
   def lock_and_destroy!(quiz, time)
+    quiztime = QuizTime.find_by(student_id: student.id)
+    if quiztime == nil
+      quiztime = QuizTime.create!(student_id: student.id, time: time)
+    end
     quiz = Quiz.choose_one(self).id if quiz.blank?
     QuizLock.create! student_id: student.id, quiz_id: quiz, quiz_time: time
     destroy

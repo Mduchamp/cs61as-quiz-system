@@ -4,8 +4,11 @@ Feature: Number of quizzes to be graded
   I want what would scheme output and True/False questions to be auto-graded
   so that it takes less time for the readers to grade.
 
+Background:
+  Given I am logged in as a staff user
+
 Scenario: I should not see T/F or What would scheme output questions in grading
-  Given that I am on the staff dashboard
+  Given I am on the Staff Dashboard
   When I follow "Grading"
   And I press a quiz to grade
   Then I should not see True/False questions

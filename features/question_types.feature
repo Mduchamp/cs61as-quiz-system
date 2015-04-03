@@ -5,17 +5,16 @@ Feature: Different question types for the quizzes
   so that I can generate various quiz questions.
 
 Scenario: I am adding a new question
-  Given that I am on the staff dashboard
-  Then I should see "Questions"
-  When I press "Questions"
-  Then I should be on the Questions page
-  And I press "New Question!"
+  Given I am logged in as a staff user
+  And I am on the Questions page
+  When I try to add a new question
   Then I should see "Question type" category
-  And I press "Question type"
+  When I press "Question type"
   Then I should see "Multiple choice, Multiple part, True/False, What Would Scheme Output"
 
 Scenario: I want to see a multiple choice question "test" created in Lession 0-1
-  Given that I am on the Questions Page
+  Given I am logged in as a staff user
+  Given I am on the Questions page
   When I follow "Lesson 0-1"
   And I should see the content "test"
   And I should see "Type: multiple choice"

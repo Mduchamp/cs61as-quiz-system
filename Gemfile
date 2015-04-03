@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.1.5'
 
 gem 'rails', '4.1.0'
 
@@ -59,7 +59,7 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'awesome_print', '1.2.0', require: 'awesome_print'
   gem 'rspec-rails', '~> 2.14.1'
-  gem 'database_cleaner', '~> 1.2.0'
+  gem 'database_cleaner', '~> 1.4.0'
   gem 'factory_girl_rails', '~> 4.4.0'
   gem 'capybara', '~> 2.2.1'
   gem 'launchy'
@@ -75,3 +75,7 @@ group :production do
   gem 'rails_12factor'
   gem 'heroku-deflater'
 end
+
+# code coverage code climate
+gem "codeclimate-test-reporter", group: :test, require: nil
+

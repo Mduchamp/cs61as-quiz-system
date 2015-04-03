@@ -4,15 +4,18 @@ Feature: Number of quizzes to be graded
   So that I can keep track of the number of quizzes to be graded,
   I want the page "grading" display the total number of quizzes need to be graded in "All Quizzes to grade" section.
 
-Scenario: I have three quizzes to grade
-  Given that I am on the staff dashboard
-  Then I must see "Grading"
-  When I press "Grading" link
-  Then I must "Quizzes to Grade(3)"
-  And I should see 3 quizzes below
+Background:
+  Given I am logged in as a staff user
+
+Scenario: I have two quizzes to grade
+  Given there are 2 quizzes to grade
+  And I am on the Grading page
+  Then I should see "Quizzes to Grade (2)"
+  And I should see 2 quizzes below
 
 Scenario: I don't have any quizzes to grade
-  Given that I am on the staff dashboard
-  When I press "Grading"
-  Then I must see "Quizzes to Grade(0)"
-  And I should have no quizz below
+  Given there are 0 quizzes to grade
+  Given I am on the Grading page
+  Then I should see "Quizzes to Grade (0)"
+  And I should see no quiz below
+>>>>>>> c0437b1230bfe11338b90100fe4017f453d5209c

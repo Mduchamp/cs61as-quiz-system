@@ -11,7 +11,7 @@ h3 Quiz Requests
           = label_tag :quiz_id, "Choose a quiz"
           = select_tag :quiz_id, options_for_select(get_selections_for_request(request))
           = label_tag :quiz_id, "Select time limit"
-          = select_tag :quiz_time, options_for_select(get_quiz_time_selections)
+          = select_tag :quiz_time, options_for_select(get_quiz_time_selections(request))
           = hidden_field_tag :id, request.id
           = submit_tag 'Approve Quiz', class: "small button"
 

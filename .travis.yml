@@ -1,0 +1,26 @@
+language: ruby
+rvm:
+- 2.1.5
+addons:
+  postgresql: '9.3'
+bundler_args: "--without production --path=~/.bundle"
+before_install:
+- 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
+- gem install bundler bundle_cache
+- bundle_cache_install
+before_script:
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database "test-postgres_test";' -U postgres
+script:
+- bundle exec rake db:migrate db:test:prepare db:seed
+- bundle exec rake cucumber
+- bundle exec rake spec
+after_script:
+- bundle_cache
+env:
+  global:
+  - BUNDLE_ARCHIVE="bundle.tgz"
+  - AWS_S3_BUCKET="cs61as-team"
+  - RAILS_ENV=test
+  - CODECLIMATE_REPO_TOKEN=2df9384e17b8b855376608fb9840f6127d410b0d7cfa2374962957c8f9d1b68a
+  - secure: eClwJL6dCP2BE4DayklmbejNY2o4h/JdVMnwXcLXUaLtjhTRywsITF9Xqx+29IOxsYBrH4mXf0rRxqN10FpJ+s3b5TRvgT9oLdMDLsXatD2foSS9stxl/HP6L8n29q7m0reiYCLNe1e3RSaaGEJk+XuVzipD6o+5dqJ3VbbOMNQ=

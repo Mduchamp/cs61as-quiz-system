@@ -5,14 +5,14 @@ Feature: approving a quiz
   I want to approve student quizzes
 
 Scenario: I don't have any quizzes to approve
-  Given that I am on the staff dashboard
-  When I press "Requests"
+  Given I am logged in as a staff user
+  And I am on the Requests page
   Then I should see "Quiz Requests"
   And I should see "You don't have any quiz requests!"
 
 Scenario: approving a quiz
   Given cs61-aa has requested a quiz
-  And I am on the staff dashboard
+  And I am on the Staff Dashboard
   When I press "Requests"
   Then I should see "Quiz Requests"
   And I should see cs61-aa
@@ -22,7 +22,7 @@ Scenario: approving a quiz
 
 Scenario: many quizzes
   Given cs61-aa and cs61as-bb have requested quizzes
-  And given I am on the staff dashboard
+  And I am on the Staff Dashboard
   When I press "Requests"
   Then I should see "Quiz Requests"
   And I should see "cs61as-aa"
