@@ -8,7 +8,6 @@ Given /^that I am on the (.*) dashboard/ do |user_type|
   end
   fill_in "Password", :with=> "password"
   click_button "Sign in"
-  page.should have_content("Welcome")
 end
 
 Then /^I must see "([^"]*)"$/ do |expected|

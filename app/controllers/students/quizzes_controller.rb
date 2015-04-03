@@ -9,6 +9,8 @@ module Students
       else
         flash[:alert] = "You can't request this quiz!"
       end
+      # call the javascript function for certain time limit and check if requests are accepted or not
+      # if request response, set ruby 
       redirect_to students_dashboard_path
     end
 

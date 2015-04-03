@@ -48,4 +48,11 @@ h1 Welcome to the Student Dashboard!
       - @taken.each do |taken|
         li
           = link_to taken, students_quiz_path(taken.id)
+javascript:
+	window.onload = function() {
+	    if(!window.location.hash) {
+	        window.location = window.location + '#loaded';
+	        window.location.reload();
+	    }
+	}
 

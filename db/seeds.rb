@@ -14,7 +14,8 @@ def make_users
                 last_name: "2",
                 email: "staff2@gmail.com",
                 password: "password",
-                login: "cs61as-ta"
+                login: "cs61as-ta",
+                added_info: true
 end
 
 def make_quizzes
