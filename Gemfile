@@ -19,7 +19,6 @@ gem 'ffaker', '~> 1.22.1'
 gem 'figaro', '~> 0.7.0'
 gem 'simplecov', :require => false, :group => :test
 
-
 # Authentication
 gem 'devise', '~> 3.2.3'
 
@@ -29,7 +28,6 @@ gem 'zip-zip'
 gem 'newrelic_rpm'
 
 # JS/Frontend
-gem 'ruby-json'
 gem 'json', '~> 1.8.1'
 gem 'redcarpet', '~> 3.1.2'
 gem 'nokogiri', '~> 1.6.1'
@@ -61,7 +59,7 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'awesome_print', '1.2.0', require: 'awesome_print'
   gem 'rspec-rails', '~> 2.14.1'
-  gem 'database_cleaner', '~> 1.4.0'
+  gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails', '~> 4.4.0'
   gem 'capybara', '~> 2.2.1'
   gem 'launchy'
@@ -77,7 +75,3 @@ group :production do
   gem 'rails_12factor'
   gem 'heroku-deflater'
 end
-
-# code coverage code climate
-gem "codeclimate-test-reporter", group: :test, require: nil
-
