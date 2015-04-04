@@ -11,10 +11,6 @@ module Students
       end
       # call the javascript function for certain time limit and check if requests are accepted or not
       # if request response, set ruby
-      @quiz = Quiz.find_by_id[:id]
-      format.js { render :js => "refresh.js" }
-      if @quiz.quiz_requests.present?
-        format.js { render :js => "stopRequests();" }
       redirect_to students_dashboard_path
     end
 
@@ -69,6 +65,16 @@ module Students
       @request = Regrade.find_by quiz: @quiz, student: @student
       @regrade = Regrade.new
       @not_graded = @scores.inject(false) { |q, q2| q || q2.nil? }
+      if @quiz.quiz_requests.present?
+        respond_to do |format|
+          format.js { render :js => "refresh.js" }
+        end
+      end
+      if @quiz.locks.present?
+        respond_to do |format|
+          format.js { render :js => "stopRequests()" }
+        end
+      end
     end
 
     private
