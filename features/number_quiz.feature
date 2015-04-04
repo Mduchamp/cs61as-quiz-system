@@ -18,4 +18,3 @@ Scenario: I don't have any quizzes to grade
   Given I am on the Grading page
   Then I should see "Quizzes to Grade (0)"
   And I should see no quiz below
->>>>>>> c0437b1230bfe11338b90100fe4017f453d5209c

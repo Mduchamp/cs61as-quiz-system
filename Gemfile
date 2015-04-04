@@ -28,6 +28,7 @@ gem 'zip-zip'
 gem 'newrelic_rpm'
 
 # JS/Frontend
+gem 'ruby-json'
 gem 'json', '~> 1.8.1'
 gem 'redcarpet', '~> 3.1.2'
 gem 'nokogiri', '~> 1.6.1'

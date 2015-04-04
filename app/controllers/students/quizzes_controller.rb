@@ -10,7 +10,11 @@ module Students
         flash[:alert] = "You can't request this quiz!"
       end
       # call the javascript function for certain time limit and check if requests are accepted or not
-      # if request response, set ruby 
+      # if request response, set ruby
+      @quiz = Quiz.find_by_id[:id]
+      format.js { render :js => "refresh.js" }
+      if @quiz.quiz_requests.present?
+        format.js { render :js => "stopRequests();" }
       redirect_to students_dashboard_path
     end
 
