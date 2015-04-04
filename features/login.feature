@@ -7,4 +7,4 @@ Feature: Students confused at login
 
 Scenario: Login to the quiz system
   Given I am on the Staging Page
-  And I should see "(CS61AS - XX)"
+  And I should see "e.g. (cs61as-xx)"

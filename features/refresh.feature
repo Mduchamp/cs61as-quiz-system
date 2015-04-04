@@ -6,6 +6,7 @@ Feature: Auto refresh when quiz is approved
 
 
 Scenario: Auto refresh the page
+  Given I am logged in as a student
   When I am in the student's browser
   Given I have requested to take a quiz
   Then I should see "Your request is not approved yet!"

@@ -1,7 +1,8 @@
 onchange = ->
-  $.ajax
-    url: gon.lock_path,
-    type: 'POST'
+  if map[70] == false and map[17] == false and map[114] == false
+    $.ajax
+      url: gon.lock_path,
+      type: 'POST'
 
 fullscreen = ->
   $('#fullscreen').click (e) ->
@@ -57,9 +58,32 @@ hilite = ->
 #   for i in [0...answers.length]
 #     HighlightLisp.highlight_element(answers[i])
 
+
+window.map = {70: false, 17: false, 91: false, 114: false};
+
+window.resetmap = ->
+  map[70] = false
+  map[17] = false
+
 ready = ->
   if $('#take_quiz_form').length
     fullscreen()
+    
+    $(window).keydown (e) ->
+      if (e.keyCode == 70 || e.keyCode == 17 || e.keyCode == 114)
+        window.map[e.keyCode] = true;
+        if e.keyCode != 70
+          e.preventDefault()
+        else
+          if window.map[17] == true
+            e.preventDefault()
+
+        #alert "key" + String.fromCharCode(e.keyCode)
+      setTimeout (-> 
+        for val in [70,17,114]
+          window.map[val] = false), 500
+
+
     $(window).blur -> onchange()
     hilite()
     timer(gon.time_left)
@@ -87,6 +111,7 @@ timer = (time) ->
     setTimeout (-> timer(time - 1)), 1000
   else
     $(".seconds").html("0 second(s)")
+    $("#honesty_statement").prop('checked',true);
     $("#submit_quiz").click()
 
 $(document).ready ready
