@@ -72,10 +72,14 @@ Then(/^I should see a textfield$/) do
   pending # express the regexp above with the code you wish you had
 end
 Then(/^I should see (\d+) quizzes below$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+  page.all('ul#to_be_graded li').count.to_s.should == arg1
+  # pending # express the regexp above with the code you wish you had
 end
 Then(/^I should see no quiz below$/) do
-  pending # express the regexp above with the code you wish you had
+  steps %{
+    Then I should see "There are no quizzes to grade! Way to Go!"
+  }
+  # pending # express the regexp above with the code you wish you had
 end
 Then(/^I should see "(.*?)" category$/) do |arg1|
   pending # express the regexp above with the code you wish you had
